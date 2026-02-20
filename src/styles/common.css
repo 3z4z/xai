@@ -1,0 +1,10 @@
+@reference './globals.css';
+
+@layer components {
+  .shadow-t-primary {
+    @apply shadow-[0_-1px_3px_1px_oklch(35%_0.10_240)];
+  }
+  .text-gradient {
+    @apply bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent;
+  }
+}
