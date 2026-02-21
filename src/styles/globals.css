@@ -59,3 +59,38 @@ body {
   color: var(--foreground);
   font-family: var(--font-geist-sans), sans-serif;
 }
+
+body {
+  cursor: url("/cursors/default.png"), auto;
+}
+
+p,
+span,
+small,
+strong,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  cursor: url("/cursors/text.png"), text;
+}
+
+button,
+a,
+.cursor-pointer,
+button *,
+a *,
+.cursor-pointer * {
+  cursor: url("/cursors/pointer.png"), pointer;
+}
+
+html {
+  -ms-overflow-style: none !important;
+  scrollbar-width: none !important;
+}
+
+html::-webkit-scrollbar {
+  display: none !important;
+}

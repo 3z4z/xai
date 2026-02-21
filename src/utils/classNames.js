@@ -1,1 +1,1 @@
-export const container = "max-w-[1440px] mx-auto px-3 w-full";
+export const container = "max-w-7xl mx-auto px-3 w-full";

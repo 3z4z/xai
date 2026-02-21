@@ -17,7 +17,7 @@ export default function DbPreviewSidebar() {
     { title: "Settings", icon: LucideCog },
   ];
   return (
-    <header>
+    <header className="max-lg:hidden">
       <p className="uppercase mb-2 text-base-content/65 font-thin">
         Management
       </p>

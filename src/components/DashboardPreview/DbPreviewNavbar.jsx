@@ -1,10 +1,15 @@
-import { LucideBellRing, LucideUser } from "lucide-react";
+import { LucideBellRing, LucideMenu, LucideUser } from "lucide-react";
 import BrandLogo from "../shared/BrandLogo";
 
 export default function DbPreviewNavbar() {
   return (
     <nav className="p-4 flex justify-between items-center">
-      <BrandLogo size={"small"} />
+      <div className="flex gap-3 items-center">
+        <button className="lg:hidden">
+          <LucideMenu className="opacity-80" />
+        </button>
+        <BrandLogo size={"small"} />
+      </div>
       <div className="flex gap-2 items-center">
         <button className="btn btn-ghost size-8.5 p-0 rounded-full ring-0 ring-transparent hover:ring-4 hover:ring-primary/25">
           <LucideBellRing className="size-4.5" />

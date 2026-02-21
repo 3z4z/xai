@@ -48,7 +48,7 @@ const stats = [
   { label: "System Latency", value: "24ms", change: "-4ms", icon: CircleGauge },
 ];
 
-export default function DashboardView() {
+export default function DbPreviewContent() {
   const [isInView, setIsInView] = useState(false);
 
   return (
@@ -59,7 +59,7 @@ export default function DashboardView() {
     >
       <div className="grid md:grid-cols-[1fr_320px] gap-4">
         <div className="space-y-6 max-md:order-2">
-          <div className="h-[320px] w-full px-6 pt-8 pb-12 rounded-2xl bg-base-200 border border-primary/14 group cursor-pointer">
+          <div className="h-[320px] w-full lg:px-6 px-3 pt-8 pb-12 rounded-2xl bg-base-200 border border-primary/14 group cursor-pointer">
             <h4 className="mb-4 font-medium opacity-75 group-hover:text-primary transition-all">
               Data Ingestion Flow
             </h4>
@@ -110,7 +110,7 @@ export default function DashboardView() {
               </AreaChart>
             </ResponsiveContainer>
           </div>
-          <div className="h-[320px] w-full px-6 pt-8 pb-12 rounded-2xl bg-base-200 border border-secondary/14 group cursor-pointer">
+          <div className="h-[320px] w-full lg:px-6 px-3 pt-8 pb-12 rounded-2xl bg-base-200 border border-secondary/14 group cursor-pointer">
             <h4 className="mb-4 font-medium opacity-75 group-hover:text-secondary transition-all">
               Processing Efficiency
             </h4>
@@ -138,7 +138,7 @@ export default function DashboardView() {
             </ResponsiveContainer>
           </div>
         </div>
-        <div className="grid md:grid-cols-1 sm:grid-cols-4 grid-cols-2 gap-4">
+        <div className="grid md:grid-cols-1 sm:grid-cols-2 gap-4">
           {stats.map((stat, i) => (
             <div
               key={i}
@@ -166,14 +166,14 @@ export default function DashboardView() {
           ))}
         </div>
       </div>
-      <div className="overflow-x-auto rounded-2xl border border-base-300 bg-base-100">
-        <table className="table w-full text-left">
+      <div className="overflow-x-auto rounded-2xl border border-primary/15 bg-base-100">
+        <table className="table">
           <thead className="bg-primary/10">
             <tr>
-              <th className="p-4">Source</th>
-              <th className="p-4">Status</th>
-              <th className="p-4">Confidence</th>
-              <th className="p-4">Timestamp</th>
+              <th className="p-4 w-1/4">Source</th>
+              <th className="p-4 w-1/4">Status</th>
+              <th className="p-4 w-1/4">Confidence</th>
+              <th className="p-4 w-1/4">Timestamp</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-white/5">

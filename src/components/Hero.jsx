@@ -17,7 +17,7 @@ function DataParticles() {
     const pos = new Float32Array(count * 3);
     const initial = new Float32Array(count * 3);
     for (let i = 0; i < count * 3; i++) {
-      const val = (Math.random() - 0.5) * 10;
+      const val = (Math.random() - 0.5) * 16;
       pos[i] = val;
       initial[i] = val;
     }
@@ -26,7 +26,7 @@ function DataParticles() {
 
   useFrame(({ clock }) => {
     const et = clock.getElapsedTime();
-    const cycle = et % 6;
+    const cycle = et % 9;
     const positionsArray = pointsRef.current.geometry.attributes.position.array;
 
     for (let i = 0; i < count; i++) {
@@ -37,11 +37,11 @@ function DataParticles() {
 
       let targetX, targetY, targetZ;
 
-      if (cycle < 2) {
+      if (cycle < 3) {
         targetX = initialPositions[i3];
         targetY = initialPositions[i3 + 1];
         targetZ = initialPositions[i3 + 2];
-      } else if (cycle < 4) {
+      } else if (cycle < 6) {
         const r = 2;
         targetX = r * Math.sin(phi) * Math.cos(theta);
         targetY = r * Math.sin(phi) * Math.sin(theta);
@@ -73,7 +73,7 @@ function DataParticles() {
       <PointMaterial
         size={0.05}
         sizeAttenuation
-        color="#6ea8ff"
+        color="#335"
         transparent
         opacity={0.8}
         depthWrite={false}
@@ -105,17 +105,24 @@ export default function HeroSection() {
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, ease: "easeOut" }}
-        className="relative z-10 flex flex-col items-center justify-center h-full text-white pointer-events-none"
+        className="relative z-10 flex flex-col items-center justify-center h-full text-white pointer-events-none px-3 text-center"
       >
-        <h1 className="text-5xl md:text-7xl font-semibold flex items-center gap-4">
-          <figure className="relative size-16 md:size-20">
-            <Image src="/logo.png" fill alt="logo" className="object-contain" />
-          </figure>
-          <span className="drop-shadow-2xl">
-            ai - <span className="text-gradient">Intelligence Workspace</span>
-          </span>
+        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-semibold flex items-center max-sm:flex-col gap-4">
+          <div className="flex justify-center items-center gap-1">
+            <figure className="relative size-13 sm:size-15 md:size-17 lg:size-20">
+              <Image
+                src="/logo.png"
+                fill
+                alt="logo"
+                className="object-contain"
+              />
+            </figure>
+            <span> ai</span>
+          </div>
+          <span className="max-sm:hidden">-</span>
+          <span className="text-gradient">Intelligence Workspace</span>
         </h1>
-        <p className="opacity-70 mt-6 text-xl tracking-wide">
+        <p className="opacity-70 mt-1 md:mt-3 lg:mt-6 text-sm sm:text-base md:text-lg lg:text-xl tracking-wide">
           From raw data to actionable intelligence
         </p>
         <div className="flex justify-center items-center mt-10 pointer-events-auto">
