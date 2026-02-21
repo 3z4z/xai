@@ -9,7 +9,7 @@ export default function HeaderComponent() {
   const [isScrolled, setIsScrolled] = useState(false);
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 200) {
+      if (window.scrollY > 1600) {
         setIsScrolled(true);
       } else {
         setIsScrolled(false);
