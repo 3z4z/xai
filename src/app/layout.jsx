@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  metadataBase: new URL("https://3z4z-portfolio.vercel.app"),
+  metadataBase: new URL("https://xai-tau-two.vercel.app/"),
 
   title: {
     default: "Xai - Intelligence Workspace",
@@ -43,11 +43,11 @@ export const metadata = {
     title: "Xai - Intelligence Workspace",
     description:
       "From raw data → structured intelligence → actionable insight → AI automations.",
-    url: "https://3z4z-portfolio.vercel.app",
+    url: "https://xai-tau-two.vercel.app/",
     siteName: "Xai",
     images: [
       {
-        url: "/og/cover.png",
+        url: "https://images2.imgbox.com/d5/54/9ej6eWfw_o.jpg",
         width: 1200,
         height: 630,
         alt: "Xai Intelligence Workspace",
@@ -61,8 +61,8 @@ export const metadata = {
     card: "summary_large_image",
     title: "Xai - Intelligence Workspace",
     description: "Turn raw data into intelligence and automation with Xai.",
-    images: ["/og/cover.png"],
-    creator: "@yourhandle",
+    images: ["https://images2.imgbox.com/d5/54/9ej6eWfw_o.jpg"],
+    creator: "@salman_ezaz",
   },
 
   robots: {
@@ -79,7 +79,7 @@ export const metadata = {
 
   icons: {
     icon: "/favicon.ico",
-    shortcut: "/favicon-16x16.png",
+    shortcut: "/favicon-96x96.png",
     apple: "/apple-touch-icon.png",
   },
 

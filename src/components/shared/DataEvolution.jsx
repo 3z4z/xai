@@ -4,6 +4,7 @@
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { useRef, useMemo } from "react";
 import * as THREE from "three";
+import Card from "./Card";
 
 function Particles({ mode }) {
   const pointsRef = useRef();
@@ -12,7 +13,6 @@ function Particles({ mode }) {
 
   const COUNT = 2000;
 
-  // ---------- RANDOM ----------
   const randomPositions = useMemo(() => {
     const arr = new Float32Array(COUNT * 3);
     for (let i = 0; i < COUNT; i++) {
@@ -23,7 +23,6 @@ function Particles({ mode }) {
     return arr;
   }, []);
 
-  // ---------- CLUSTERS ----------
   const clusterTargets = useMemo(() => {
     const centers = [
       new THREE.Vector3(1, 0, 0),
@@ -44,7 +43,6 @@ function Particles({ mode }) {
     return arr;
   }, []);
 
-  // ---------- CUBE ----------
   const cubeTargets = useMemo(() => {
     const size = 3;
     const arr = new Float32Array(COUNT * 3);
@@ -74,10 +72,9 @@ function Particles({ mode }) {
     return arr;
   }, []);
 
-  // current mutable positions
   const positions = useRef(randomPositions.slice());
 
-  useFrame((state, delta) => {
+  useFrame((_, delta) => {
     time.current += delta;
 
     const t = time.current;
@@ -91,8 +88,6 @@ function Particles({ mode }) {
       let tx = target[i];
       let ty = target[i + 1];
       let tz = target[i + 2];
-
-      // 🌊 STEP 1 — FLOATING NOISE
       if (mode === 0) {
         const id = i * 0.001;
 
@@ -100,29 +95,19 @@ function Particles({ mode }) {
         ty += Math.cos(t * 0.8 + id) * 0.2;
         tz += Math.sin(t * 0.6 + id) * 0.2;
       }
-
-      // 🧠 STEP 2 — CLUSTER ORBIT
       if (mode === 1) {
         const id = i * 0.002;
 
         tx += Math.cos(t * 1.5 + id) * 0.15;
         ty += Math.sin(t * 1.5 + id) * 0.15;
       }
-
-      // smooth interpolation
       current[i] += (tx - current[i]) * 0.05;
       current[i + 1] += (ty - current[i + 1]) * 0.05;
       current[i + 2] += (tz - current[i + 2]) * 0.05;
     }
-
-    // update GPU buffer
     pointsRef.current.geometry.attributes.position.needsUpdate = true;
-
-    // 🔒 lock camera
     camera.position.set(0, 0, 7);
     camera.lookAt(0, 0, 0);
-
-    // 🔷 STEP 3 rotation
     if (mode === 2) {
       pointsRef.current.rotation.y += 0.003;
       pointsRef.current.rotation.x += 0.002;
@@ -153,18 +138,19 @@ function Particles({ mode }) {
 
 export default function DataEvolution({ step }) {
   return (
-    <Canvas
-      camera={{ position: [0, 0, 7], fov: 45 }}
-      dpr={[1, 1.5]}
-      gl={{ antialias: true }}
-      style={{ width: "100%", height: "100%" }}
-      // 🚫 kill scroll + pointer interaction completely
-      onWheel={(e) => e.preventDefault()}
-      onPointerDown={(e) => e.stopPropagation()}
-      onPointerMove={(e) => e.stopPropagation()}
-      onPointerUp={(e) => e.stopPropagation()}
-    >
-      <Particles mode={step} />
-    </Canvas>
+    <Card>
+      <Canvas
+        camera={{ position: [0, 0, 7], fov: 45 }}
+        dpr={[1, 1.5]}
+        gl={{ antialias: true }}
+        style={{ width: "100%", height: "100%" }}
+        onWheel={(e) => e.preventDefault()}
+        onPointerDown={(e) => e.stopPropagation()}
+        onPointerMove={(e) => e.stopPropagation()}
+        onPointerUp={(e) => e.stopPropagation()}
+      >
+        <Particles mode={step} />
+      </Canvas>
+    </Card>
   );
 }

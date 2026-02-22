@@ -37,7 +37,6 @@ export default function DashboardPreviewSection() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
             >
-              {/* overlay */}
               <motion.div
                 className="absolute inset-0 bg-black/40"
                 onClick={() => setOpenSidebar(false)}
@@ -45,8 +44,6 @@ export default function DashboardPreviewSection() {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
               />
-
-              {/* sidebar panel */}
               <motion.div
                 initial={{ x: -260 }}
                 animate={{ x: 0 }}

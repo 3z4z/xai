@@ -25,7 +25,7 @@ function DataParticles({ scrollProgress }) {
   }, []);
 
   useFrame(() => {
-    const progress = scrollProgress.get(); // 0 → 1
+    const progress = scrollProgress.get();
     const positionsArray = pointsRef.current.geometry.attributes.position.array;
 
     for (let i = 0; i < count; i++) {
@@ -37,25 +37,21 @@ function DataParticles({ scrollProgress }) {
       let targetX, targetY, targetZ;
 
       if (progress < 0.33) {
-        // RAW DATA
         targetX = initialPositions[i3];
         targetY = initialPositions[i3 + 1];
         targetZ = initialPositions[i3 + 2];
       } else if (progress < 0.66) {
-        // STRUCTURED (sphere)
         const r = 2;
         targetX = r * Math.sin(phi) * Math.cos(theta);
         targetY = r * Math.sin(phi) * Math.sin(theta);
         targetZ = r * Math.cos(phi);
       } else {
-        // EXPANDED INTELLIGENCE
         const r = 4;
         targetX = r * Math.sin(phi) * Math.cos(theta);
         targetY = r * Math.sin(phi) * Math.sin(theta);
         targetZ = r * Math.cos(phi);
       }
 
-      // smooth lerp motion
       positionsArray[i3] += (targetX - positionsArray[i3]) * 0.05;
       positionsArray[i3 + 1] += (targetY - positionsArray[i3 + 1]) * 0.05;
       positionsArray[i3 + 2] += (targetZ - positionsArray[i3 + 2]) * 0.05;
@@ -63,11 +59,9 @@ function DataParticles({ scrollProgress }) {
 
     pointsRef.current.geometry.attributes.position.needsUpdate = true;
 
-    // subtle rotation for life
     pointsRef.current.rotation.y += 0.002;
     pointsRef.current.rotation.x += 0.001;
 
-    // subtle scale growth based on progress
     const scale = 1 + progress * 0.3;
     pointsRef.current.scale.set(scale, scale, scale);
   });
@@ -109,16 +103,13 @@ export default function HeroSection() {
 
   return (
     <section ref={heroRef} id="hero" className="h-[220vh] relative bg-base-100">
-      {/* Sticky viewport */}
       <div className="sticky top-0 h-dvh overflow-hidden">
-        {/* Canvas background */}
         <div className="absolute inset-0 z-0">
           <Canvas camera={{ position: [0, 0, 10], fov: 50 }}>
             <DataParticles scrollProgress={scrollYProgress} />
           </Canvas>
         </div>
 
-        {/* Content */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
@@ -149,8 +140,6 @@ export default function HeroSection() {
             <Button onClick={handleScroll}>How Xai works</Button>
           </div>
         </motion.div>
-
-        {/* vignette overlay */}
         <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_center,transparent_30%,black_100%)]" />
       </div>
     </section>

@@ -29,7 +29,7 @@ export default function Card({ children, className = "" }) {
       onMouseMove={handleMouseMove}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className={`relative overflow-hidden rounded-2xl p-px border border-primary/5 bg-base-300 ${className}`}
+      className={`relative overflow-hidden rounded-2xl p-px border border-primary/5 bg-base-300 h-full ${className}`}
     >
       <motion.div
         className="pointer-events-none absolute -inset-px z-0 transition-opacity duration-300"
@@ -38,7 +38,7 @@ export default function Card({ children, className = "" }) {
           background: background,
         }}
       />
-      <div className="relative z-10 h-full w-full rounded-[15px] bg-neutral-950 px-10 py-12 min-h-[50dvh]">
+      <div className="relative z-10 h-full w-full rounded-[15px] bg-base-200 px-10 py-12">
         {children}
       </div>
     </motion.div>
