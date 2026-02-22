@@ -68,7 +68,7 @@ Instead of static cards, the dashboard features a **Product-First UI**.
 1.  **Clone the Repo**
 
     ```bash
-    git clone [https://github.com/3z4z/xai.git](https://github.com/3z4z/xai.git)
+    git clone https://github.com/3z4z/xai.git
     cd xai
     ```
 
