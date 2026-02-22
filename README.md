@@ -1,36 +1,92 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Xai — Intelligence Workspace
 
-## Getting Started
+### Frontend Challenge: Product Experience Prototype
 
-First, run the development server:
+**[Go to the live link](https://xai-tau-two.vercel.app/)**
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Video Walkthrough
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+You can watch the video demonstration from here: **[See Video](https://drive.google.com/file/d/1zGp5WFvg36mly8LTlabBwlewmz5VNFWS/view?usp=drive_link)**
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## Project Vision
 
-To learn more about Next.js, take a look at the following resources:
+**Xai** is a high-fidelity interactive product experience designed to visualize the transformation of raw data into actionable intelligence. This isn't a marketing landing page—it's a deep dive into **UI/UX clarity, intentional motion, and engineering discipline.**
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+The experience follows a singular narrative: **Raw Data → Structured Intelligence → Actionable Insight.**
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Key Design Pillars
 
-## Deploy on Vercel
+- **Technical Confidence:** A dark, sophisticated palette with "Stripe-level" polish.
+- **Calm Power:** Using motion to guide focus rather than distract.
+- **Purposeful Geometry:** Abstract 3D elements that represent data flow and logic.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Tech Stack
+
+| Layer                  | Technology                          |
+| :--------------------- | :---------------------------------- |
+| **Core Framework**     | Next.js 16                          |
+| **3D Rendering**       | Three.js / React Three Fiber / Drei |
+| **Animation (Scroll)** | GSAP + ScrollTrigger                |
+| **Animation (UI)**     | Framer Motion                       |
+| **Styling**            | Tailwind CSS + DaisyUI              |
+| **Data Viz**           | Recharts                            |
+| **Icons**              | Lucide React                        |
+
+---
+
+## Engineering & Motion Philosophy
+
+### 1. The "WOW" Moment: 3D Data Transformation
+
+The hero section features a **React Three Fiber** canvas where abstract particles (Raw Data) respond to the user's scroll and cursor. This demonstrates an understanding of **math-based motion**, transitioning from high-entropy chaos to a structured 3D grid as the user engages.
+
+### 2. Animation Architecture
+
+I utilized a dual-engine approach to motion:
+
+- **GSAP:** Best-in-class for complex, scroll-bound timelines where multiple elements must sync across the DOM and the 3D Canvas.
+- **Framer Motion:** Used for "micro-interactions"—button hovers, sidebar transitions, and spring-based layout animations that make the UI feel tactile and responsive.
+
+### 3. Intelligence Dashboard Preview
+
+Instead of static cards, the dashboard features a **Product-First UI**.
+
+- **Visual Hierarchy:** Clean typography and purposeful spacing.
+- **Stateful UI:** Real-time filtering and tab transitions using shared layout headers.
+- **Custom Cursor:** A sophisticated custom cursor that changes state based on interactive elements, enhancing the "Workspace" feel.
+
+---
+
+## Local Development
+
+1.  **Clone the Repo**
+
+    ```bash
+    git clone [https://github.com/3z4z/xai.git](https://github.com/3z4z/xai.git)
+    cd xai
+    ```
+
+2.  **Install Dependencies**
+
+    ```bash
+    npm install
+    ```
+
+3.  **Run Development Server**
+
+    ```bash
+    npm run dev
+    ```
+
+4.  **Build for Production**
+    ```bash
+    npm run build
+    ```
+
+---
