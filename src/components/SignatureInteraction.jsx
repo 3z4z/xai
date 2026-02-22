@@ -7,7 +7,7 @@ import {
   MeshDistortMaterial,
   PerspectiveCamera,
 } from "@react-three/drei";
-import { motion, useScroll, useTransform, useSpring } from "framer-motion";
+import { useScroll, useSpring } from "framer-motion";
 import * as THREE from "three";
 
 function DataMorph({ mouse, isExploding, setIsExploding }) {
@@ -22,9 +22,11 @@ function DataMorph({ mouse, isExploding, setIsExploding }) {
     damping: 20,
   });
 
-  const [randomPos, spherePos] = useMemo(() => {
+  const stages = useMemo(() => {
     const random = new Float32Array(count * 3);
     const sphere = new Float32Array(count * 3);
+    const polyhedron = new Float32Array(count * 3);
+
     for (let i = 0; i < count; i++) {
       random[i * 3] = (Math.random() - 0.5) * 15;
       random[i * 3 + 1] = (Math.random() - 0.5) * 15;
@@ -32,25 +34,44 @@ function DataMorph({ mouse, isExploding, setIsExploding }) {
 
       const phi = Math.acos(-1 + (2 * i) / count);
       const theta = Math.sqrt(count * Math.PI) * phi;
-      sphere[i * 3] = 2.5 * Math.cos(theta) * Math.sin(phi);
-      sphere[i * 3 + 1] = 2.5 * Math.sin(theta) * Math.sin(phi);
-      sphere[i * 3 + 2] = 2.5 * Math.cos(phi);
+      sphere[i * 3] = 6.5 * Math.cos(theta) * Math.sin(phi);
+      sphere[i * 3 + 1] = 6.5 * Math.sin(theta) * Math.sin(phi);
+      sphere[i * 3 + 2] = 6.5 * Math.cos(phi);
+
+      polyhedron[i * 3] = 1.5 * Math.cos(theta) * Math.sin(phi);
+      polyhedron[i * 3 + 1] = 1.5 * Math.sin(theta) * Math.sin(phi);
+      polyhedron[i * 3 + 2] = 1.5 * Math.cos(phi);
     }
-    return [random, sphere];
+
+    return { random, sphere, polyhedron };
   }, []);
 
-  useFrame((_) => {
+  useFrame(() => {
     const t = smoothProgress.get();
     const positions = pointsRef.current.geometry.attributes.position.array;
 
     for (let i = 0; i < count * 3; i++) {
-      let target = THREE.MathUtils.lerp(randomPos[i], spherePos[i], t);
-      if (isExploding) {
-        target *= 1.5;
+      let target;
+
+      if (t < 0.4) {
+        target = THREE.MathUtils.lerp(
+          stages.random[i],
+          stages.sphere[i],
+          t / 0.4,
+        );
+      } else {
+        target = THREE.MathUtils.lerp(
+          stages.sphere[i],
+          stages.polyhedron[i],
+          (t - 0.4) / 0.6,
+        );
       }
+
+      if (isExploding) target *= 1.5;
 
       positions[i] = THREE.MathUtils.lerp(positions[i], target, 0.1);
     }
+
     pointsRef.current.geometry.attributes.position.needsUpdate = true;
 
     const targetX = (mouse.current[0] * Math.PI) / 10;
@@ -77,7 +98,7 @@ function DataMorph({ mouse, isExploding, setIsExploding }) {
           <bufferAttribute
             attach="attributes-position"
             count={count}
-            array={randomPos}
+            array={stages.random}
             itemSize={3}
           />
         </bufferGeometry>
@@ -89,6 +110,7 @@ function DataMorph({ mouse, isExploding, setIsExploding }) {
           blending={THREE.AdditiveBlending}
         />
       </points>
+
       <mesh ref={meshRef} scale={1.5}>
         <icosahedronGeometry args={[1, 15]} />
         <MeshDistortMaterial
@@ -107,14 +129,6 @@ function DataMorph({ mouse, isExploding, setIsExploding }) {
 export default function SignatureInteractionSection() {
   const mouse = useRef([0, 0]);
   const [isExploding, setIsExploding] = useState(false);
-  const { scrollYProgress } = useScroll();
-
-  const textOpacity = useTransform(
-    scrollYProgress,
-    [0, 0.4, 0.6, 1],
-    [0.05, 0.2, 0.2, 0.05],
-  );
-  const textScale = useTransform(scrollYProgress, [0, 1], [0.9, 1.05]);
 
   return (
     <section

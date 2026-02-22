@@ -7,29 +7,9 @@ import Button from "./shared/Button";
 import SectionTitle from "./shared/SectionTitle";
 import { container } from "@/utils/classNames";
 import DataEvolution from "./shared/DataEvolution";
+import { insightSteps } from "@/utils/mockData";
 
 gsap.registerPlugin(ScrollTrigger);
-
-const steps = [
-  {
-    title: "Ingest Data",
-    subtitle: "Unified Data Aggregation",
-    text: "Bridge the gap between siloed environments. Our engine connects to your entire stack—SQL, NoSQL, APIs, and raw documents—normalizing disparate data into a high-fidelity vector space in real-time.",
-    features: ["Multi-source Sync", "Auto-Schema Mapping", "Real-time ETL"],
-  },
-  {
-    title: "Analyze with AI",
-    subtitle: "Neural Context Engine",
-    text: "Move beyond keyword search. Our LLM-orchestration layer performs deep semantic analysis, identifying hidden correlations and anomalies across millions of data points that human observers miss.",
-    features: ["Pattern Recognition", "Semantic Search", "Anomaly Detection"],
-  },
-  {
-    title: "Generate Insight",
-    subtitle: "Strategic Decision Intelligence",
-    text: "Convert complexity into clarity. Automated reports, executive summaries, and predictive forecasting are generated instantly, providing a clear roadmap for your next strategic move.",
-    features: ["Automated Reporting", "Trend Forecasting", "Actionable Alerts"],
-  },
-];
 
 export default function InsightsSection() {
   const containerRef = useRef(null);
@@ -43,11 +23,10 @@ export default function InsightsSection() {
         scrollTrigger: {
           trigger: containerRef.current,
           start: "top top",
-          end: `+=${steps.length * 100}%`,
+          end: `+=${insightSteps.length * 100}%`,
           scrub: 1,
           pin: true,
           anticipatePin: 1,
-          // When leaving downward, animate cards to the top
           onLeave: () => {
             gsap.to(cards, {
               top: "0%",
@@ -56,7 +35,6 @@ export default function InsightsSection() {
               ease: "power2.out",
             });
           },
-          // When leaving upward, animate cards to the top (or wherever you prefer)
           onLeaveBack: () => {
             gsap.to(cards, {
               top: "0%",
@@ -65,7 +43,6 @@ export default function InsightsSection() {
               ease: "power2.out",
             });
           },
-          // When re-entering, snap them back to center smoothly
           onEnter: () => {
             gsap.to(cards, {
               top: isSmallScreen ? "32%" : "50%",
@@ -86,7 +63,6 @@ export default function InsightsSection() {
       });
 
       cards.forEach((card, i) => {
-        // Initial state for all cards to ensure they are centered while active
         if (i === 0) {
           tl.to(card, { opacity: 1, duration: 0.1 });
         } else {
@@ -132,7 +108,7 @@ export default function InsightsSection() {
         className="relative min-h-[calc(85vh)] md:min-h-[calc(70vh)] flex flex-col justify-center"
       >
         <div className="relative flex-1 flex items-center justify-center">
-          {steps.map((step, index) => (
+          {insightSteps.map((step, index) => (
             <div
               key={index}
               className="insight-card absolute w-full flex flex-col md:flex-row gap-12 items-center"
@@ -161,8 +137,6 @@ export default function InsightsSection() {
                   ))}
                 </div>
               </div>
-
-              {/* Story Visual Placeholder - Imagine an SVG or Lottie animation here */}
               <div className="flex-1 w-full aspect-square bg-linear-to-br from-primary/10 to-transparent rounded-3xl border border-primary/5 flex items-center justify-center relative group overflow-hidden max-md:max-w-[520px] max-sm:max-w-[400px] max-md:px-6">
                 <div className="absolute inset-0 bg-grid-white/[0.02] bg-size-[32px_32px]" />
                 <div className="relative w-full aspect-square max-w-[520px]">
@@ -175,7 +149,7 @@ export default function InsightsSection() {
           ))}
         </div>
       </div>
-      <div className="h-[20vh]" /> {/* Buffer for scroll feel */}
+      <div className="h-[20vh]" />
     </section>
   );
 }
