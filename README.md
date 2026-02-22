@@ -48,9 +48,10 @@ The hero section features a **React Three Fiber** canvas where abstract particle
 
 ### 2. Animation Architecture
 
-I utilized a dual-engine approach to motion:
+I utilized a trio-engine approach to motion:
 
 - **GSAP:** Best-in-class for complex, scroll-bound timelines where multiple elements must sync across the DOM and the 3D Canvas.
+- **Three.js:** Powers the core spatial narrative, translating abstract data into high-performance 3D geometries that react dynamically to user input and scroll depth.
 - **Framer Motion:** Used for "micro-interactions"—button hovers, sidebar transitions, and spring-based layout animations that make the UI feel tactile and responsive.
 
 ### 3. Intelligence Dashboard Preview
